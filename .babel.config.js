@@ -1,14 +1,10 @@
 module.exports = {
-    presets:[
+    presets: [
         "@babel/preset-env",
-        "@babel/preset-react",
-        "@babel/plugin-syntax-jsx",
-        "babel-preset-react-app",
-        {
-            "runtime": "classic"
-          }
+        ["@babel/preset-react", { runtime: "classic" }]
     ],
     plugins: [
-        '@babel/plugin-proposal-private-methods'
-      ]
-}
+        "@babel/plugin-syntax-jsx",
+        "@babel/plugin-proposal-private-methods"
+    ]
+};
