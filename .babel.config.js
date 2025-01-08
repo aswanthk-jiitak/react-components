@@ -3,5 +3,8 @@ module.exports = {
         "@babel/preset-env",
         "@babel/preset-react",
         "@babel/plugin-syntax-jsx"
-    ]
+    ],
+    plugins: [
+        '@babel/plugin-proposal-private-methods'
+      ]
 }
