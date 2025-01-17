@@ -13,11 +13,11 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Eye icon
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; // Eye off icon
 
-function PasswordPage() {
+function RegistrationPage() {
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    navigate('/'); // Navigates to the About page
+    navigate('/registration/'); // Navigates to the About page
 };
   return (
     <MainLayout>
@@ -39,10 +39,9 @@ function PasswordPage() {
         <Typography fontWeight="bold" // Makes the text bold
             textAlign="left" // Aligns the text to the left 
             color='black' fontSize={'29px'}
-            width={'385px'}>パスワード設定</Typography>
-        <Typography color='#666C75' width={385} fontSize={'15px'} textAlign={'left'}>Input password requirements here / パスワード入力条件をここに記載してください</Typography>
+            width={'385px'}>新規登録</Typography>
       <Stack direction="column" spacing={1} mt={'40px'}>
-      <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
+      <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>メールアドレス</Typography>
       <TextFields sx={{ width: '385px', height:'44px' }} type='password' 
       InputProps={{
         endAdornment: (
@@ -57,11 +56,13 @@ function PasswordPage() {
       </Stack>
       <Stack direction="column" spacing={1}>
       <Stack direction="row" spacing={25}>
-        <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード（確認）</Typography>
+        <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
         </Stack>
         <TextFields sx={{ width: '385px', height:'44px' }} type='password' />
         </Stack>
-        <Buttons sx={{ width: '385px', borderRadius: '48px', mt: '20px'}} label={'設定する'} onClick={handleNavigate}/>
+        <Typography color='#666C75' width={385} fontSize={'13px'} textAlign={'left'}>パスワード入力条件をここに表示 / Input password requirements here</Typography>
+        <Buttons sx={{ width: '385px', borderRadius: '48px', mt: '20px'}} label={'新規登録'} onClick={handleNavigate}/>
+        <Typography color='#666C75' width={385} fontSize={'13px'} textAlign={'left'}>新規登録を完了すると、ServiceNameの利用規約とプラバシーポリシーに同意したことになります。</Typography>
         </Box>
       
       </header>
@@ -70,4 +71,4 @@ function PasswordPage() {
   );
 }
 
-export default PasswordPage;
+export default RegistrationPage;

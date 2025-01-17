@@ -13,6 +13,9 @@ import ResetPage from './pages/reset-pw';
 import EmailPage from './pages/email';
 import NewPasswordPage from './pages/setNewPW';
 import ResetSuccessPage from './pages/reset-complete';
+import PasswordSettingPage from './pages/passwordSetting';
+import RegistrationPage from './pages/registration';
+import AccountInformationPage from './pages/accountInformation';
 
 
 function App() {
@@ -25,7 +28,9 @@ function App() {
                 <Route path="/email/" element={<EmailPage />} />
                 <Route path="/new-pass/" element={<NewPasswordPage />} />
                 <Route path="/reset-success/" element={<ResetSuccessPage />} />
-
+                <Route path="/password-reset/" element={<PasswordSettingPage />} />
+                <Route path="/registration/" element={<RegistrationPage />} />
+                <Route path="/account-information/" element={<AccountInformationPage />} />
 
 
 

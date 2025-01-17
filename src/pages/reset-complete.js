@@ -20,7 +20,7 @@ function ResetSuccessPage() {
           alignItems: 'center',
           gap: '16px',
           width: '449px',
-          height: '376px',
+          height: '246px',
           margin: '0 auto',
           padding: '24px',
           border: '0.5px solid #ddd', 
@@ -32,7 +32,7 @@ function ResetSuccessPage() {
             textAlign="left" // Aligns the text to the left 
             color='black' fontSize={'29px'}>パスワード再設定完了</Typography>
         <Typography color='#666C75' width={300} fontSize={'15px'} textAlign={'left'}>新しいパスワードの設定が完了しました。</Typography>
-        <Buttons sx={{ width: '385px', borderRadius: '48px'}} label={'ログイン画面に進む'}/>
+        <Buttons sx={{ width: '385px', borderRadius: '48px', mt:"20px"}} label={'ログイン画面に進む'}/>
         </Box>
       
       </header>

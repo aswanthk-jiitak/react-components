@@ -42,8 +42,8 @@ function ResetPage() {
       <Stack direction="column" spacing={1}>
       <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>登録済みメールアドレス</Typography>
       <TextFields sx={{ width: '385px', height:'44px' }} />
-      </Stack>
-        <Buttons sx={{ width: '385px', borderRadius: '48px'}} label={'パスワード再設定用メールを送信'} onClick={handleNavigate}/>
+      </Stack >
+        <Buttons sx={{ width: '385px', borderRadius: '48px' , mt:'22px' }} label={'パスワード再設定用メールを送信'} onClick={handleNavigate}/>
         <Typography fontWeight="bold" // Makes the text bold
             textAlign="left" // Aligns the text to the left 
             color='black' fontSize={'15px'}>ログインに戻る</Typography>

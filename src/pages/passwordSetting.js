@@ -13,11 +13,11 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility'; // Eye icon
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; // Eye off icon
 
-function PasswordPage() {
+function PasswordSettingPage() {
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    navigate('/'); // Navigates to the About page
+    navigate('/reset-success/'); // Navigates to the About page
 };
   return (
     <MainLayout>
@@ -39,8 +39,8 @@ function PasswordPage() {
         <Typography fontWeight="bold" // Makes the text bold
             textAlign="left" // Aligns the text to the left 
             color='black' fontSize={'29px'}
-            width={'385px'}>パスワード設定</Typography>
-        <Typography color='#666C75' width={385} fontSize={'15px'} textAlign={'left'}>Input password requirements here / パスワード入力条件をここに記載してください</Typography>
+            width={'385px'}>新しいパスワード</Typography>
+        <Typography color='#666C75' width={385} fontSize={'15px'} textAlign={'left'}>新しく設定したいパスワードを入力してください。Input password requirements here / パスワード入力条件をここに記載してください</Typography>
       <Stack direction="column" spacing={1} mt={'40px'}>
       <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
       <TextFields sx={{ width: '385px', height:'44px' }} type='password' 
@@ -70,4 +70,4 @@ function PasswordPage() {
   );
 }
 
-export default PasswordPage;
+export default PasswordSettingPage;
