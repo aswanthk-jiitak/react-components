@@ -6,9 +6,11 @@ import TextFields from '../components/textField';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
+import MainLayout from '../layout/mailLayout';
 
 function EmailPage() {
   return (
+    <MainLayout>
     <div className="App">
       <header className="App-header">
       <Box
@@ -33,6 +35,7 @@ function EmailPage() {
       
       </header>
     </div>
+    </MainLayout>
   );
 }
 

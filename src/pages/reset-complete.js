@@ -6,9 +6,11 @@ import TextFields from '../components/textField';
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
+import MainLayout from '../layout/mailLayout';
 
 function ResetSuccessPage() {
   return (
+  <MainLayout>
     <div className="App">
       <header className="App-header">
         <Box
@@ -35,6 +37,7 @@ function ResetSuccessPage() {
       
       </header>
     </div>
+    </MainLayout>
   );
 }
 

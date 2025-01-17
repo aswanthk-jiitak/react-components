@@ -7,6 +7,7 @@ import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import MainLayout from '../layout/mailLayout';
 
 function ResetPage() {
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ function ResetPage() {
 };
   
     return (
+      <MainLayout>
 
     <div className="App">
       <header className="App-header">
@@ -49,6 +51,7 @@ function ResetPage() {
       
       </header>
     </div>
+    </MainLayout>
   );
 }
 

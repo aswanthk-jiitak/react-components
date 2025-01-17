@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { TextField, IconButton, InputAdornment } from '@mui/material';
+import MainLayout from '../layout/mailLayout';
 
 
 function NewPasswordPage() {
@@ -26,6 +27,7 @@ function NewPasswordPage() {
 
 
   return (
+    <MainLayout>
     <div className="App">
       <header className="App-header">
       <Box
@@ -71,6 +73,7 @@ function NewPasswordPage() {
       
       </header>
     </div>
+    </MainLayout>
   );
 }
 
