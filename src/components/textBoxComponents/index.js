@@ -1,16 +1,16 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-const TextFields = ({ 
-    label, 
-    variant = "outlined", 
-    type = "text", 
-    multiline = false, 
-    rows = 1, 
-    fullWidth = true, 
-    value, 
+const TextFieldComponent = ({
+    label,
+    variant = "outlined",
+    type = "text",
+    multiline = false,
+    rows = 1,
+    fullWidth = true,
+    value,
     onChange,
-    size = "medium",  
+    size = "medium",
     sx = {}
 }) => {
     return (
@@ -22,11 +22,11 @@ const TextFields = ({
             rows={multiline ? rows : 1}
             fullWidth={fullWidth}
             value={value}
-            size = {size}
+            size={size}
             onChange={onChange}
             sx={sx}
         />
     );
 };
 
-export default TextFields;
+export default TextFieldComponent;

@@ -1,43 +1,37 @@
-// // import logo from './logo.svg';
-// import { alignProperty } from '@mui/material/styles/cssUtils';
+import React, { Suspense, lazy } from 'react';
 import './App.css';
-import Buttons from './components/button';
-import TextFields from './components/textField';
-import { Box } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/login';
-import PasswordPage from './pages/possword';
-import ResetPage from './pages/reset-pw';
-import EmailPage from './pages/email';
-import NewPasswordPage from './pages/setNewPW';
-import ResetSuccessPage from './pages/reset-complete';
-import PasswordSettingPage from './pages/passwordSetting';
-import RegistrationPage from './pages/registration';
-import AccountInformationPage from './pages/accountInformation';
 
+// Lazy load the components
+const LoginPage = lazy(() => import('./pages/login'));
+const PasswordPage = lazy(() => import('./pages/possword'));
+const ResetPage = lazy(() => import('./pages/reset-pw'));
+const EmailPage = lazy(() => import('./pages/email'));
+const NewPasswordPage = lazy(() => import('./pages/setNewPW'));
+const ResetSuccessPage = lazy(() => import('./pages/reset-complete'));
+const PasswordSettingPage = lazy(() => import('./pages/passwordSetting'));
+const RegistrationPage = lazy(() => import('./pages/registration'));
+const AccountInformationPage = lazy(() => import('./pages/accountInformation'));
 
-function App() {
+const App = () => {
   return (
-<Router>
+    <Router>
+      {/* Wrap routes in Suspense for lazy-loaded components */}
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/pass/" element={<PasswordPage />} />
-                <Route path="/reset/" element={<ResetPage />} />
-                <Route path="/email/" element={<EmailPage />} />
-                <Route path="/new-pass/" element={<NewPasswordPage />} />
-                <Route path="/reset-success/" element={<ResetSuccessPage />} />
-                <Route path="/password-reset/" element={<PasswordSettingPage />} />
-                <Route path="/registration/" element={<RegistrationPage />} />
-                <Route path="/account-information/" element={<AccountInformationPage />} />
-
-
-
-                {/* <Route path="/about" element={<AboutPage />} /> */}
-            </Routes>
-        </Router>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/pass/" element={<PasswordPage />} />
+          <Route path="/reset/" element={<ResetPage />} />
+          <Route path="/email/" element={<EmailPage />} />
+          <Route path="/new-pass/" element={<NewPasswordPage />} />
+          <Route path="/reset-success/" element={<ResetSuccessPage />} />
+          <Route path="/password-reset/" element={<PasswordSettingPage />} />
+          <Route path="/registration/" element={<RegistrationPage />} />
+          <Route path="/account-information/" element={<AccountInformationPage />} />
+        </Routes>
+      </Suspense>
+    </Router>
   );
-}
+};
 
 export default App;
