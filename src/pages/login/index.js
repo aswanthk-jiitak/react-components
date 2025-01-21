@@ -1,5 +1,8 @@
 
+import MainLayout from "../../layout/mailLayout";
 import { Box, Stack, Typography } from "@mui/material";
+import ButtonComponents from "../../components/buttonComponents";
+import TextFieldComponent from "../../components/textBoxComponents";
 
 const LoginPage = () => {
     return (
@@ -26,16 +29,16 @@ const LoginPage = () => {
                             width={'385px'}>ログイン</Typography>
                         <Stack direction="column" spacing={1} sx={{ mt: '22px' }}>
                             <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>メールアドレス</Typography>
-                            <TextFields sx={{ width: '385px', height: '44px', borderRadius: '2px' }} />
+                            <TextFieldComponent sx={{ width: '385px', height: '44px', borderRadius: '2px' }} />
                         </Stack>
                         <Stack direction="column" spacing={1}>
                             <Stack direction="row" spacing={25}>
                                 <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
                                 <Typography color='#666C75' fontSize={'12px'} textAlign={'left'} sx={{ textDecoration: 'underline' }} >パスワードを忘れた</Typography>
                             </Stack>
-                            <TextFields sx={{ width: '385px', height: '44px', borderRadius: '2px' }} type='password' />
+                            <TextFieldComponent sx={{ width: '385px', height: '44px', borderRadius: '2px' }} type='password' />
                         </Stack>
-                        <Buttons sx={{ width: '385px', height: '48px', borderRadius: '44px', mt: '20px' }} type='password' label={'ログイン'} />
+                        <ButtonComponents sx={{ width: '385px', height: '48px', borderRadius: '44px', mt: '20px' }} type='password' label={'ログイン'} />
                     </Box>
 
                 </header>

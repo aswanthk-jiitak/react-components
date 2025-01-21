@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const LoginPage = lazy(() => import('./pages/login'));
 const PasswordPage = lazy(() => import('./pages/possword'));
 const ResetPage = lazy(() => import('./pages/reset-pw'));
-const EmailPage = lazy(() => import('./pages/email'));
+const EmailPage = lazy(() => import('./pages/forgotPassword'));
 const NewPasswordPage = lazy(() => import('./pages/setNewPW'));
 const ResetSuccessPage = lazy(() => import('./pages/reset-complete'));
 const PasswordSettingPage = lazy(() => import('./pages/passwordSetting'));
@@ -20,14 +20,14 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/pass/" element={<PasswordPage />} />
-          <Route path="/reset/" element={<ResetPage />} />
-          <Route path="/email/" element={<EmailPage />} />
-          <Route path="/new-pass/" element={<NewPasswordPage />} />
-          <Route path="/reset-success/" element={<ResetSuccessPage />} />
-          <Route path="/password-reset/" element={<PasswordSettingPage />} />
-          <Route path="/registration/" element={<RegistrationPage />} />
-          <Route path="/account-information/" element={<AccountInformationPage />} />
+          <Route path="/pass" element={<PasswordPage />} />
+          <Route path="/reset" element={<ResetPage />} />
+          <Route path="/email" element={<EmailPage />} />
+          <Route path="/new-pass" element={<NewPasswordPage />} />
+          <Route path="/reset-success" element={<ResetSuccessPage />} />
+          <Route path="/password-reset" element={<PasswordSettingPage />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/account-information" element={<AccountInformationPage />} />
         </Routes>
       </Suspense>
     </Router>
