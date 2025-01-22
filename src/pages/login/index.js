@@ -3,17 +3,24 @@ import MainLayout from "../../layout/mailLayout";
 import { Box, Stack, Typography } from "@mui/material";
 import ButtonComponents from "../../components/buttonComponents";
 import TextFieldComponent from "../../components/textBoxComponents";
+import { apiAuth } from '../../utils/http';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
+    const navigate = useNavigate()
 
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);  // Update the email state
+        setEmail(e.target.value);  // Update the password state
     };
 
-    const handleEmailsubmit = (e) => {
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);  // Update the email state
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault(); // Prevent the default form submission (if inside a form)
     
         console.log("Button clicked");
@@ -27,6 +34,20 @@ const LoginPage = () => {
             console.log("Valid email");
             setEmailError('');
         }
+
+        if (emailError==='')
+            {
+            apiAuth.post("signin", {
+                    "email": email,
+                    "password": password
+              })
+              .then((res) => {
+                navigate("/");
+              })
+              .catch((err) => {
+                console.log("error >>", err)
+              });
+          }
     };
 
     return (
@@ -60,9 +81,9 @@ const LoginPage = () => {
                                 <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
                                 <Typography color='#666C75' fontSize={'12px'} textAlign={'left'} sx={{ textDecoration: 'underline' }} >パスワードを忘れた</Typography>
                             </Stack>
-                            <TextFieldComponent sx={{ width: '385px', height: '44px', borderRadius: '2px' }} type='password' />
+                            <TextFieldComponent sx={{ width: '385px', height: '44px', borderRadius: '2px' }} type='password' onChange={handlePasswordChange}/>
                         </Stack>
-                        <ButtonComponents sx={{ width: '385px', height: '48px', borderRadius: '44px', mt: '20px' }} type='password' label={'ログイン'} onClick={handleEmailsubmit}/>
+                        <ButtonComponents sx={{ width: '385px', height: '48px', borderRadius: '44px', mt: '20px' }} type='password' label={'ログイン'} onClick={handleSubmit}/>
                         {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
                     </Box>
 

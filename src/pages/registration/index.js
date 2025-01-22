@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../layout/mailLayout';
-import ButtonComponents from '../components/buttonComponents';
-import TextFieldComponent from '../components/textBoxComponents';
+import MainLayout from '../../layout/mailLayout';
+import ButtonComponents from '../../components/buttonComponents';
+import TextFieldComponent from '../../components/textBoxComponents';
 import { Stack, Typography, Box, IconButton, InputAdornment } from '@mui/material';
 import { Checkbox } from '@mui/material';
+import { apiAuth } from '../../utils/http';
 
 
 function RegistrationPage() {
@@ -42,24 +43,59 @@ function RegistrationPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) { // Use the current email state here
         console.log("Invalid email");
+        console.log("email",1111)
         setEmailError('有効なメールアドレスを入力してください');
     } else {
         console.log("Valid email");
         setEmailError('');
+        console.log("email",222222)
+
     }
 
+    console.log(">>", emailError)
 
+    console.log("vvvvvv",password1.length)
     if (password1.length < 12 || password1.length > 20) {
+      console.log("pass",111111)
       setPasswordError('12文字以上20文字以内で、半角の大文字, 小文字, 数字を含めてください。');
       console.log('error founf')
   } else {
+    console.log("pass",2222)
       setPasswordError('');
   }
 
     if(password1!=password2){
+      console.log("comp",1111)
       setPasswordCompareError('パスワードが一致していません')
     } else {
       setPasswordCompareError('')
+      console.log("comp",222222)
+
+    }
+
+    console.log("email", emailError)
+    console.log("pass", passwordError)
+    console.log("comp", passwordCompareError)
+
+
+    if (emailError==='' && passwordCompareError==='' && passwordError==='')
+      {
+
+      apiAuth
+        .post("signup", {
+            name: "",  // Add the name as required
+            admin_type: "admin",  // Set the admin type
+            email: email,  // Use the email passed in the form/input
+            status: "active",  // Set the default status
+            password: password1,  // Add the password (ensure it's from a form input)
+            otpVerification: false  // Assuming this is a boolean flag for OTP verification
+        })
+        .then((res) => {
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log("error >>", err)
+        });
     }
 
     };
@@ -81,6 +117,7 @@ function RegistrationPage() {
               border: '0.5px solid #ddd',
               justifyContent: 'center'
             }}>
+              
             <Typography fontWeight="bold" // Makes the text bold
               textAlign="left" // Aligns the text to the left 
               color='black' fontSize={'29px'}
@@ -89,6 +126,7 @@ function RegistrationPage() {
               <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>メールアドレス</Typography>
               <TextFieldComponent sx={{ width: '385px', height: '44px' }} onChange={handleEmailChange} />
             </Stack>
+            { console.log("ccccccc", emailError)}
             {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
             <Stack direction="column" spacing={1}>
               <Stack direction="row" spacing={25}>
