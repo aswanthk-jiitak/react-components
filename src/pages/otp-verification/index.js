@@ -62,27 +62,27 @@ const OTPPage = () => {
                         </Stack>
 
 
-<Stack direction="row" width={'385px'} spacing={1}>
-      {otp.map((digit, index) => (
-        <TextField
-          key={index}
-          value={digit}
-          onChange={(e) => handleChange(e.target.value, index)}
-          onKeyDown={(e) => handleKeyDown(e, index)}
-          inputRef={(ref) => (inputRefs.current[index] = ref)}
-          sx={{
-            width: "44px",
-            height: "44px",
-            borderRadius: "2px",
-            textAlign: "center",
-          }}
-          inputProps={{
-            maxLength: 1,
-            style: { textAlign: "center" },
-          }}
-        />
-      ))}
-    </Stack>
+                    <Stack direction="row" width={'385px'} spacing={1}>
+                        {otp.map((digit, index) => (
+                            <TextField
+                            key={index}
+                            value={digit}
+                            onChange={(e) => handleChange(e.target.value, index)}
+                            onKeyDown={(e) => handleKeyDown(e, index)}
+                            inputRef={(ref) => (inputRefs.current[index] = ref)}
+                            sx={{
+                                width: "44px",
+                                height: "44px",
+                                borderRadius: "2px",
+                                textAlign: "center",
+                            }}
+                            inputProps={{
+                                maxLength: 1,
+                                style: { textAlign: "center" },
+                            }}
+                            />
+                        ))}
+                        </Stack>
                         
                         <ButtonComponents sx={{ width: '385px', height: '48px', borderRadius: '44px', mt: '20px', fontWeight:"bold"}} type='password' label={'認証する'} />
                         <Typography color='#666C75' fontSize={'12px'} textAlign={'left'} fontWeight="bold">再送信する</Typography>
