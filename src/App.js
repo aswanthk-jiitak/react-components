@@ -12,6 +12,7 @@ const ResetSuccessPage = lazy(() => import('./pages/reset-complete'));
 const PasswordSettingPage = lazy(() => import('./pages/passwordSetting'));
 const RegistrationPage = lazy(() => import('./pages/registration'));
 const AccountInformationPage = lazy(() => import('./pages/accountInformation'));
+const OTPPage = lazy(() => import('./pages/otp-verification'));
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/password-reset" element={<PasswordSettingPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/account-information" element={<AccountInformationPage />} />
+          <Route path="/otp-verification" element={<OTPPage/>} />
         </Routes>
       </Suspense>
     </Router>

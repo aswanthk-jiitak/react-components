@@ -91,7 +91,7 @@ function RegistrationPage() {
             otpVerification: false  // Assuming this is a boolean flag for OTP verification
         })
         .then((res) => {
-          navigate("/");
+          navigate("/otp-verification");
         })
         .catch((err) => {
           console.log("error >>", err)
