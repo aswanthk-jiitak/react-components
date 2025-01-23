@@ -9,6 +9,7 @@ const TextFieldComponent = ({
     rows = 1,
     fullWidth = true,
     value,
+    inputRef,
     onChange,
     size = "medium",
     sx = {}
@@ -22,6 +23,7 @@ const TextFieldComponent = ({
             rows={multiline ? rows : 1}
             fullWidth={fullWidth}
             value={value}
+            inputRef={inputRef}
             size={size}
             onChange={onChange}
             sx={sx}

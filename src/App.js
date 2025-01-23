@@ -12,6 +12,7 @@ const ResetSuccessPage = lazy(() => import('./pages/reset-complete'));
 const PasswordSettingPage = lazy(() => import('./pages/passwordSetting'));
 const RegistrationPage = lazy(() => import('./pages/registration'));
 const AccountInformationPage = lazy(() => import('./pages/accountInformation'));
+const OtpVerify = lazy(() => import('./pages/otpVerify'));
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/otp" element={<OtpVerify />} />
           <Route path="/pass" element={<PasswordPage />} />
           <Route path="/reset" element={<ResetPage />} />
           <Route path="/email" element={<EmailPage />} />
