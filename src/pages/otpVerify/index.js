@@ -11,9 +11,13 @@ const OtpVerify = () => {
     const inputRefs = useRef([]);
 
     const handleOtpChange = (index, value) => {
+        if (!/^\d?$/.test(value)) return;
         const newOtp = [...otpValues];
         newOtp[index] = value;
         setOtpValues(newOtp);
+        if (value && index < otpValues.length - 1) {
+            inputRefs.current[index + 1]?.focus();
+        }
     };
 
     const handleResend = () => {
@@ -56,9 +60,11 @@ const OtpVerify = () => {
                             key={index}
                             type="text"
                             value={value}
+                            inputMode="numeric"
                             onChange={(e) => handleOtpChange(index, e.target.value)}
                             inputRef={(el) => (inputRefs.current[index] = el)}
                             size="small"
+                            maxLength={1}
                             sx={{
                                 width: '48px',
                                 height: '48px',
@@ -89,7 +95,7 @@ const OtpVerify = () => {
                 {/* Resend Link */}
                 <Typography
                     variant="body2"
-                    sx={{ marginTop: '16px', cursor: 'pointer', fontWeight: 'bold' }}
+                    sx={{ marginTop: '16px', cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}
                     onClick={handleResend}
                 >
                     再送信する
