@@ -11,6 +11,7 @@ const TextFieldComponent = ({
     value,
     inputRef,
     onChange,
+
     size = "medium",
     sx = {}
 }) => {
@@ -26,6 +27,7 @@ const TextFieldComponent = ({
             inputRef={inputRef}
             size={size}
             onChange={onChange}
+
             sx={sx}
         />
     );
