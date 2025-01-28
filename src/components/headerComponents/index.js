@@ -1,6 +1,6 @@
 
 import { AppBar, Toolbar, Typography } from '@mui/material';
-import LogoImage from '../../assets/images/20px.png';
+import LogoImage from '../../assets/images/Vector.svg';
 import ButtonComponents from '../buttonComponents';
 
 
