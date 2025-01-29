@@ -134,7 +134,7 @@ function RegistrationPage() {
           padding: '32px',
           margin: '0 auto',
           border: '1px solid #ddd',
-          borderRadius: '8px',
+          // borderRadius: '50px',
           backgroundColor: '#fff',
           marginTop: "100px"
         }}
@@ -213,11 +213,11 @@ function RegistrationPage() {
           label={
             <Typography variant="body2" color="gray">
               新規登録することにより、 当社の
-              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: '' }}>
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', }}>
                 利用規約
               </Typography>
               と
-              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: '' }}>
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer',  }}>
                 プライバシーポリシー
               </Typography>
               に同意したことになります。
