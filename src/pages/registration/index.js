@@ -3,173 +3,246 @@ import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../layout/mailLayout';
 import ButtonComponents from '../../components/buttonComponents';
 import TextFieldComponent from '../../components/textBoxComponents';
-import { Stack, Typography, Box, IconButton, InputAdornment } from '@mui/material';
-import { Checkbox } from '@mui/material';
+import { Stack, Typography, Box, IconButton, InputAdornment, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import { apiAuth } from '../../utils/http';
 
-
 function RegistrationPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate('/registration/'); // Navigates to the About page
-  };
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [email, setEmail] = useState('');
-  const [password1, setPassword1] = useState('');
-  const [password2, setPassword2] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordCompareError, setPasswordCompareError] = useState('');
+  const [termsError, setTermsError] = useState('');
 
+  // Email Validation
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);  // Update the email state
-    };
-
-    const handlePassword1Change = (e) => {
-      setPassword1(e.target.value);  // Update the email state
-      };
-
-    const handlePassword2Change = (e) => {
-        setPassword2(e.target.value);  // Update the email state
-        };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission (if inside a form)
-
-    console.log("Button clicked");
-    console.log(email)
+    const newEmail = e.target.value;
+    setEmail(newEmail);
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) { // Use the current email state here
-        console.log("Invalid email");
-        console.log("email",1111)
-        setEmailError('有効なメールアドレスを入力してください');
+    if (!emailRegex.test(newEmail)) {
+      setEmailError('有効なメールアドレスを入力してください');
     } else {
-        console.log("Valid email");
-        setEmailError('');
-        console.log("email",222222)
-
+      setEmailError('');
     }
+  };
 
-    console.log(">>", emailError)
+  // Password Validation
+  const handlePassword1Change = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
 
-    console.log("vvvvvv",password1.length)
-    if (password1.length < 12 || password1.length > 20) {
-      console.log("pass",111111)
+    if (newPassword.length < 12 || newPassword.length > 20) {
       setPasswordError('12文字以上20文字以内で、半角の大文字, 小文字, 数字を含めてください。');
-      console.log('error founf')
-  } else {
-    console.log("pass",2222)
-      setPasswordError('');
-  }
-
-    if(password1!=password2){
-      console.log("comp",1111)
-      setPasswordCompareError('パスワードが一致していません')
     } else {
-      setPasswordCompareError('')
-      console.log("comp",222222)
-
+      setPasswordError('');
     }
 
-    console.log("email", emailError)
-    console.log("pass", passwordError)
-    console.log("comp", passwordCompareError)
+    // Check if password matches confirm password
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setPasswordCompareError('パスワードが一致していません');
+    } else {
+      setPasswordCompareError('');
+    }
+  };
 
+  // Confirm Password Validation
+  const handlePassword2Change = (e) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
 
-    if (emailError==='' && passwordCompareError==='' && passwordError==='')
-      {
+    if (newConfirmPassword !== password) {
+      setPasswordCompareError('パスワードが一致していません');
+    } else {
+      setPasswordCompareError('');
+    }
+  };
 
-      apiAuth
-        .post("signup", {
-            name: "",  // Add the name as required
-            admin_type: "admin",  // Set the admin type
-            email: email,  // Use the email passed in the form/input
-            status: "active",  // Set the default status
-            password: password1,  // Add the password (ensure it's from a form input)
-            otpVerification: false  // Assuming this is a boolean flag for OTP verification
-        })
-        .then((res) => {
-          navigate("/otp-verification");
-        })
-        .catch((err) => {
-          console.log("error >>", err)
-        });
+  // Validate Form Before Submitting
+  const validateForm = () => {
+    let valid = true;
+
+    // Email validation
+    if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      setEmailError('有効なメールアドレスを入力してください');
+      valid = false;
+    } else {
+      setEmailError('');
     }
 
-    };
+    // Password validation
+    if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{12,20}$/)) {
+      setPasswordError('12文字以上20文字以内で、半角の大文字, 小文字, 数字を含めてください。');
+      valid = false;
+    } else {
+      setPasswordError('');
+    }
+
+    // Password confirmation check
+    if (password !== confirmPassword) {
+      setPasswordCompareError('パスワードが一致していません');
+      valid = false;
+    } else {
+      setPasswordCompareError('');
+    }
+
+    // Terms & conditions check
+    if (!termsAccepted) {
+      setTermsError('利用規約に同意してください。');
+      valid = false;
+    }
+
+    return valid;
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form before proceeding
+    if (!validateForm()) return;
+
+    apiAuth
+      .post("signup", {
+        name: "",  // Add the name as required
+        admin_type: "admin",
+        email: email,
+        status: "active",
+        password: password,
+        otpVerification: false
+      })
+      .then(() => {
+        navigate("/otp-verification");
+      })
+      .catch((err) => {
+        console.log("error >>", err);
+      });
+  };
 
   return (
     <MainLayout>
-      <div className="App">
-        <header className="App-header">
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '16px',
-              width: '449px',
-              height: '568px',
-              margin: '0 auto',
-              padding: '24px',
-              border: '0.5px solid #ddd',
-              justifyContent: 'center'
-            }}>
-              
-            <Typography fontWeight="bold" // Makes the text bold
-              textAlign="left" // Aligns the text to the left 
-              color='black' fontSize={'29px'}
-              width={'385px'}>新規登録</Typography>
-            <Stack direction="column" spacing={1} mt={'40px'}>
-              <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>メールアドレス</Typography>
-              <TextFieldComponent sx={{ width: '385px', height: '44px' }} onChange={handleEmailChange} />
-            </Stack>
-            { console.log("ccccccc", emailError)}
-            {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
-            <Stack direction="column" spacing={1}>
-              <Stack direction="row" spacing={25}>
-                <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
-              </Stack>
-              <TextFieldComponent sx={{ width: '385px', height: '44px' }} type='password' onChange={handlePassword1Change}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <ButtonComponents label={'hiii'} />
+      <Box
+        sx={{
+          width: '450px',
+          padding: '32px',
+          margin: '0 auto',
+          border: '1px solid #ddd',
+          borderRadius: '8px',
+          backgroundColor: '#fff',
+        }}
+      >
+        <Typography variant="h5" fontWeight="bold" mb={3}>
+          新規登録
+        </Typography>
 
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}/>
-            </Stack>
-            {passwordError && <p style={{ color: 'red', fontSize: '12px' }}>{passwordError}</p>}
-            <Typography color='#666C75' width={385} fontSize={'12px'} textAlign={'left'}>・半角大文字, 小文字, 数字を含めた12文字以上20桁以内</Typography>
-            <Stack direction="column" spacing={1} >
-              <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード確認用</Typography>
-              <TextFieldComponent sx={{ width: '385px', height: '44px' }} type='password' onChange={handlePassword2Change}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <ButtonComponents label={'hiii'} />
+        {/* Email Input */}
+        <Typography variant="body2" fontWeight="bold" mb={1}>
+          メールアドレス
+        </Typography>
+        <TextFieldComponent
+          fullWidth
+          variant="outlined"
+          value={email}
+          onChange={handleEmailChange}
+        />
+        {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
 
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }} />
-            </Stack>
-            {passwordCompareError && <p style={{ color: 'red', fontSize: '12px' }}>{passwordCompareError}</p>}
-            <Stack width={'385px'} direction="row" spacing={1}>
-              <Checkbox></Checkbox>
-              <Typography color='#666C75' width={385} fontSize={'13px'} textAlign={'left'}>新規登録することにより、当社の利用規約とプライバシーポリシーに同意したとみなされます。</Typography>
-            </Stack>
-            <ButtonComponents sx={{ width: '385px', borderRadius: '48px', mt: '20px' }} label={'新規登録'} onClick={handleSubmit} />
-          </Box>
+        {/* Password Input */}
+        <Typography variant="body2" fontWeight="bold" mt={2} mb={1}>
+          パスワード
+        </Typography>
+        <TextField
+          fullWidth
+          type={showPassword ? 'text' : 'password'}
+          variant="outlined"
+          value={password}
+          onChange={handlePassword1Change}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? '非表示' : '表示'}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Typography variant="caption" color="gray" mt={1} display="block">
+          ・半角大文字、小文字、数字を含めた12文字以上20桁以内
+        </Typography>
+        {passwordError && <p style={{ color: 'red', fontSize: '12px' }}>{passwordError}</p>}
 
-        </header>
-      </div>
+        {/* Confirm Password Input */}
+        <Typography variant="body2" fontWeight="bold" mt={2} mb={1}>
+          パスワード確認用
+        </Typography>
+        <TextField
+          fullWidth
+          type={showConfirmPassword ? 'text' : 'password'}
+          variant="outlined"
+          value={confirmPassword}
+          onChange={handlePassword2Change}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                  {showConfirmPassword ? '非表示' : '表示'}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        {passwordCompareError && <p style={{ color: 'red', fontSize: '12px' }}>{passwordCompareError}</p>}
+
+        {/* Checkbox for Terms */}
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={termsAccepted}
+              onChange={(e) => setTermsAccepted(e.target.checked)}
+            />
+          }
+          label={
+            <Typography variant="body2" color="gray">
+              新規登録することにより、 当社の
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: 'bold' }}>
+                利用規約
+              </Typography>
+              と
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: 'bold' }}>
+                プライバシーポリシー
+              </Typography>
+              に同意したことになります。
+            </Typography>
+          }
+          sx={{ mt: 2 }}
+        />
+        {termsError && <p style={{ color: 'red', fontSize: '12px' }}>{termsError}</p>}
+        {/* Submit Button */}
+        <ButtonComponents
+          label="新規登録"
+          color="black"
+          onClick={handleSubmit}
+          // disabled={!validateForm()}  // Disable button if form is invalid
+          sx={{
+            width: '100%',
+            borderRadius: '30px',
+            padding: '12px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            backgroundColor: '#111827',
+            color: 'white',
+            mt: 3,
+          }}
+        />
+      </Box>
     </MainLayout>
   );
 }
