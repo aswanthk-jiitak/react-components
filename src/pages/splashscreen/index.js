@@ -7,19 +7,19 @@ import { apiAuth } from '../../utils/http';
 import { useNavigate } from 'react-router-dom';
 import LogoImage from '../../assets/images/Vector.svg';
 
-const splashscreenPage = () => {
+const SplashscreenPage = () => {
 
     return (
         <MainLayout>
-        <div className="App">
+            <div className="App">
                 <header className="App-header">
                     <Box>
-                    <img width="48px" src={LogoImage}></img>
+                        <img width="48px" src={LogoImage}></img>
                     </Box>
                 </header>
             </div>
-            </MainLayout>
+        </MainLayout>
     );
 }
 
-export default splashscreenPage;
+export default SplashscreenPage;
