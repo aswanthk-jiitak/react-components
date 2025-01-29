@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SplashscreenPage from './pages/splashscreen';
+
 
 // Lazy load the components
 const LoginPage = lazy(() => import('./pages/login'));
@@ -20,7 +22,7 @@ const App = () => {
   return (
     <Router>
       {/* Wrap routes in Suspense for lazy-loaded components */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SplashscreenPage />}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/pass" element={<PasswordPage />} />
@@ -31,8 +33,8 @@ const App = () => {
           <Route path="/password-reset" element={<PasswordSettingPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/account-information" element={<AccountInformationPage />} />
-          <Route path="/otp-verification" element={<OTPPage/>} />
-          <Route path="/splash-screen" element={<SplashScreenPage/>} />
+          <Route path="/otp-verification" element={<OTPPage />} />
+          {/* <Route path="/splash-screen" element={<SplashScreenPage />} /> */}
         </Routes>
       </Suspense>
     </Router>
