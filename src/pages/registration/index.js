@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../layout/mailLayout';
 import ButtonComponents from '../../components/buttonComponents';
 import TextFieldComponent from '../../components/textBoxComponents';
-import { Stack, Typography, Box, IconButton, InputAdornment, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { Stack, Typography, Box, IconButton, InputAdornment, TextField, FormControlLabel, Checkbox, colors } from '@mui/material';
 import { apiAuth } from '../../utils/http';
 
 function RegistrationPage() {
@@ -136,6 +136,7 @@ function RegistrationPage() {
           border: '1px solid #ddd',
           borderRadius: '8px',
           backgroundColor: '#fff',
+          marginTop: "100px"
         }}
       >
         <Typography variant="h5" fontWeight="bold" mb={3}>
@@ -143,7 +144,7 @@ function RegistrationPage() {
         </Typography>
 
         {/* Email Input */}
-        <Typography variant="body2" fontWeight="bold" mb={1}>
+        <Typography variant="body2" fontWeight="" mb={1}>
           メールアドレス
         </Typography>
         <TextFieldComponent
@@ -155,7 +156,7 @@ function RegistrationPage() {
         {emailError && <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>}
 
         {/* Password Input */}
-        <Typography variant="body2" fontWeight="bold" mt={2} mb={1}>
+        <Typography variant="body2" fontWeight="" mt={2} mb={1}>
           パスワード
         </Typography>
         <TextField
@@ -166,9 +167,9 @@ function RegistrationPage() {
           onChange={handlePassword1Change}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment position="end" >
                 <IconButton onClick={() => setShowPassword(!showPassword)}>
-                  {showPassword ? '非表示' : '表示'}
+                  {showPassword ? "非表示" : "表示"}
                 </IconButton>
               </InputAdornment>
             ),
@@ -180,7 +181,7 @@ function RegistrationPage() {
         {passwordError && <p style={{ color: 'red', fontSize: '12px' }}>{passwordError}</p>}
 
         {/* Confirm Password Input */}
-        <Typography variant="body2" fontWeight="bold" mt={2} mb={1}>
+        <Typography variant="body2" fontWeight="" mt={2} mb={1}>
           パスワード確認用
         </Typography>
         <TextField
@@ -191,9 +192,9 @@ function RegistrationPage() {
           onChange={handlePassword2Change}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
+              <InputAdornment position="end" style={{ colors: "black" }}>
                 <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                  {showConfirmPassword ? '非表示' : '表示'}
+                  {showConfirmPassword ? "非表示" : "表示"}
                 </IconButton>
               </InputAdornment>
             ),
@@ -212,11 +213,11 @@ function RegistrationPage() {
           label={
             <Typography variant="body2" color="gray">
               新規登録することにより、 当社の
-              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: 'bold' }}>
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: '' }}>
                 利用規約
               </Typography>
               と
-              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: 'bold' }}>
+              <Typography component="span" sx={{ textDecoration: 'underline', cursor: 'pointer', color: '#111827', fontWeight: '' }}>
                 プライバシーポリシー
               </Typography>
               に同意したことになります。
