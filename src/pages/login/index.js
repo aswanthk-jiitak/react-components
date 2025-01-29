@@ -30,10 +30,13 @@ const LoginPage = () => {
         if (!emailRegex.test(email)) { // Use the current email state here
             console.log("Invalid email");
             setEmailError('有効なメールアドレスを入力してください');
+            return;
         } else {
             console.log("Valid email");
             setEmailError('');
         }
+
+        console.log(emailError)
 
         if (emailError==='')
             {
@@ -45,8 +48,14 @@ const LoginPage = () => {
                 navigate("/");
               })
               .catch((err) => {
-                console.log("error >>", err)
-              });
+                if (err.response && err.response.data) {
+                    console.log("API Error >>", err.response.data);
+                    const errorMessage = "メールアドレス（またはユーザー名）かパスワードに誤りがあります"; 
+                    setEmailError(errorMessage);
+                } else {
+                    console.log("Unexpected error >>", err);
+                    setEmailError("サーバーエラーが発生しました");
+            }});
           }
     };
 
