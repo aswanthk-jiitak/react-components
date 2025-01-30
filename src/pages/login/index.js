@@ -45,7 +45,7 @@ const LoginPage = () => {
                     "password": password
               })
               .then((res) => {
-                navigate("/");
+                navigate("/home");
               })
               .catch((err) => {
                 if (err.response && err.response.data) {
@@ -88,7 +88,7 @@ const LoginPage = () => {
                         <Stack direction="column" spacing={1}>
                             <Stack direction="row" spacing={25}>
                                 <Typography color='#666C75' fontSize={'12px'} textAlign={'left'}>パスワード</Typography>
-                                <Typography color='#666C75' fontSize={'12px'} textAlign={'left'} sx={{ textDecoration: 'underline' }} >パスワードを忘れた</Typography>
+                                <Typography color='#666C75' fontSize={'12px'} textAlign={'left'} sx={{ textDecoration: 'underline', cursor:"pointer" }} onClick={() => navigate('/reset')}>パスワードを忘れた</Typography>
                             </Stack>
                             <TextFieldComponent sx={{ width: '385px', height: '44px', borderRadius: '2px' }} type='password' onChange={handlePasswordChange}/>
                         </Stack>
